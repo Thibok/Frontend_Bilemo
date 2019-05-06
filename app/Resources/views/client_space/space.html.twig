@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} My space{% endblock %}
+{% block body %}
+    <div class="container" id="wrap">
+        <div class="row" id="main">
+            <div class="col-lg-6 my-5" id="space_container">
+                <h1 class="text-center text-dark pt-2">My space</h1>
+                <ul>
+                    {% if app.environment != 'test' %}
+                        <li id="space_api_key" class="pt-2"><strong>My api key:</strong> {{ app.user.accessToken }}</li>
+                    {% endif %}
+                    <li class="pt-2">Follow the project on <a href="https://github.com/Thibok/Bilemo">Github</a></li>
+                    <li class="pt-2">For more information read the <a href="https://api.bilemo.tc-dev.ovh/doc">documentation</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
