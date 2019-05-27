@@ -1,0 +1,27 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+
+    providers:
+        facebook_user_provider:
+            id: AppBundle\Provider\FacebookUserProvider
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        secured_area:
+            pattern: ^/space
+            stateless: false
+            simple_preauth:
+                authenticator: AppBundle\Authenticator\FacebookAuthenticator
+            provider: facebook_user_provider
+            logout:
+                path:   /space/logout
+                target: /
+            logout_on_user_change: true
+        main:
+            anonymous: ~
+            logout_on_user_change: true
