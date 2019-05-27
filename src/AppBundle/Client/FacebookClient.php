@@ -74,16 +74,20 @@ class FacebookClient
      */
     public function requestFacebookForUser(array $fields, $accessToken)
     {
-        $url = 'https://graph.facebook.com/me?access_token=' .$accessToken. '&fields=';
+        $url = 'https://graph.facebook.com/me?access_token=' .$accessToken;    
+        $secretProof = hash_hmac('sha256', $accessToken, $this->clientSecret);
+        $url .= '&appsecret_proof=' .$secretProof. '&fields=';
+
         $fieldsLength = count($fields);
         
         for ($index = 0; $index < $fieldsLength; $index++) { 
             $lastIndex = $fieldsLength - $index;
             if ($lastIndex == 1) {
                 $url .= $fields[$index];
-            } else {
-                $url .= $fields[$index]. ',';
+                break;
             }
+
+            $url .= $fields[$index]. ',';     
         }
 
         return $response = $this->client->get($url);

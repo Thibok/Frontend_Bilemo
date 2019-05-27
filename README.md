@@ -3,7 +3,7 @@
 <p>Welcome on the Bilemo Frontend app ! This app is the Frontend part of the <a href="https://github.com/Thibok/Bilemo">Bilemo Api</a><br/>
 <h2>Prerequisites</h2>
 <ul>
-  <li>PHP 7</li>
+  <li>PHP 7.3</li>
   <li>Mysql</li>
   <li>Apache</li>
 </ul>

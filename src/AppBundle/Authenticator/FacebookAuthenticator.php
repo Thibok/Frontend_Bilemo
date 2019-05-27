@@ -78,19 +78,19 @@ class FacebookAuthenticator implements SimplePreAuthenticatorInterface, Authenti
             throw new InvalidCsrfTokenException('Invalid CSRF token.');
         }
 
-        if ($code = $request->query->get('code')) {
-            $redirectUri = $this->router->generate('bi_space', [], ROUTER::ABSOLUTE_URL);
-
-            $data = $this->fbRequester->getAccessToken($code, $redirectUri);
-
-            if (isset($data['error'])) {
-                throw new CustomUserMessageAuthenticationException($data['error']);
-            }
-
-            $accessToken = $data['access_token'];
-        } else {
+        if (!$code = $request->query->get('code')) {
             throw new CustomUserMessageAuthenticationException('You must be logged to access this page !');
+        } 
+
+        $redirectUri = $this->router->generate('bi_space', [], ROUTER::ABSOLUTE_URL);
+
+        $data = $this->fbRequester->getAccessToken($code, $redirectUri);
+
+        if (isset($data['error'])) {
+            throw new CustomUserMessageAuthenticationException($data['error']);
         }
+
+        $accessToken = $data['access_token'];
 
         return new PreAuthenticatedToken(
             'anon.',

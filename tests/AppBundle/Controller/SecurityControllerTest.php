@@ -27,7 +27,7 @@ class SecurityControllerTest extends WebTestCase
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->client = self::createClient();
     }
@@ -113,7 +113,7 @@ class SecurityControllerTest extends WebTestCase
     /**
      * {@inheritdoc}
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->client = null;
     }
